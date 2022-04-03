@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ceyda Yenilmez 2018280053</title>
+</head>
+<body>
+    <h1>Ceyda Yenilmez</h1>
+    <h1>2018280053</h1> 
+    <h2>2019 Guz Doneminin ikinci Odevi</h2>
+    <form>
+    Sayiyi Giriniz : <br>
+    <input type="text" name= "alan1" id="id1">
+    <br><br>
+    Romen Rakami Karsiligi : <span id="id2"></span>
+    <br><br>
+        <input type="button" value="Romen Rakamina Çevir" id="numtoroman">
+    <br><br>
+
+    Romen Rakami Giriniz: <br>
+    <input type="text" name= "alan3" id="id3">
+    <br><br>
+    Sayi Karsiligi : <span id="id4"></span>
+    <br><br>
+        <input type="button" value="Sayiya Cevir" id="romantonum">
+    </form>
+    <div id="sonuc"></div>
+    
+    <script>
+        var metin1=document.getElementById("id1");
+        var metin2=document.getElementById("id2");
+        var numtoromanBtn=document.getElementById("numtoroman");
+        
+        var metin3=document.getElementById("id3");
+        var metin4=document.getElementById("id4");
+        var romantonumBtn=document.getElementById("romantonum");
+
+        numtoromanBtn.onclick=function()
+        {  
+            var roman = ""; 
+            var sayi= Number(metin1.value);
+            roman = romanize(sayi);
+            metin2.innerText  = roman;
+         }
+
+         romantonumBtn.onclick=function()
+        {  
+            var roman = "";
+            var sayi = 0; 
+            var roman = metin3.value;
+            sayi = roman_to_Int(roman);
+            metin4.innerText  = sayi;
+         }
+
+         
+        function romanize(num) {
+            var lookup = {M:1000,CM:900,D:500,CD:400,C:100,XC:90,L:50,XL:40,X:10,IX:9,V:5,IV:4,I:1},roman = '',i;
+            if (num > 3999) {
+                alert("Geçersiz Sayi");
+                return(null);
+            }    
+            for ( i in lookup ) {
+                while ( num >= lookup[i] ) {
+                roman += i;
+                num -= lookup[i];
+                }
+            }
+            return roman;
+        }
+        
+        function char_to_int(c){
+            switch (c){
+            case 'I': return 1;
+            case 'V': return 5;
+            case 'X': return 10;
+            case 'L': return 50;
+            case 'C': return 100;
+            case 'D': return 500;
+            case 'M': return 1000;
+            default: return -1;
+            }
+        }
+
+        function roman_to_Int(str1) {
+            if(str1 == null) return -1;
+            var num = char_to_int(str1.charAt(0));
+            var pre, curr;
+
+            for(var i = 1; i < str1.length; i++){
+            curr = char_to_int(str1.charAt(i));
+            pre = char_to_int(str1.charAt(i-1));
+            if(curr <= pre){
+            num += curr;
+            } else {
+            num = num - pre*2 + curr;
+            }
+            }
+
+            if (num > 3999) {
+                alert("Geçersiz Sayi");
+                return null;
+            }    
+            return num;
+        }
+
+</script>
+
+</body>
+</html> 
